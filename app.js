@@ -1,4 +1,4 @@
-let funcionalidadTareas = require('./funcionalidadTareas.js');
+let funcionalidadTareas = require('./funcionalidadesTareas');
 
 
 // cuando por consola hagamos "node app.js palabra" palabra va a guardarse en la variable accion y desencadenara distintas operaciones
@@ -11,7 +11,6 @@ let parametroAdicional = process.argv[3];
 // por ejemplo "node app.js puedeComprar {montoTotal} {montoCuota}"
 // iria como "node app.js puedeComprar 150000000 635000"
 let parametroAdicionalDos = process.argv[4];
-
 switch(accion) {
     case 'listar':
         funcionalidadTareas.listar();

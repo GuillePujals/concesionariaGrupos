@@ -1,22 +1,34 @@
-let operacionesArchivo = require('./operacionesArchivo.js');
+let operacionesArchivo = require('./operacionesArchivos');
+let todosAutos =  operacionesArchivo.leerArchivoJson();
 
 
 let concesionaria = {
-  autos: operacionesArchivo.leerArchivoJson(),
+  //autos:  operacionesArchivo.leerArchivoJson(),
 
   listar: () => {},
       // cuando se llama a este metodo se imprimen todos los autos en autos.json
 
 
+  // cuando se llama a este metodo se imprimen todos los datos del auto con de la patente dada. 
+  //Sino esta, devuelve null
   buscarAuto: (patente) => {
-    return autos.filter(a => a.patente = patente);
+    for (let i = 0; i < todosAutos.length; i++) {
+      if (todosAutos[i].patente == patente) return todosAutos[i];
+    }
+    return null;
   },
-    // cuando se llama a este metodo se imprimen todos los datos del auto con de la patente dada. 
-    //Sino esta, devuelve null
 
 
-  venderAuto: () => {},
-    // cuando se llama a este metodo se sobrescribe el objeto de autos, cambiando este auto en particular a vendido
+  // cuando se llama a este metodo se sobrescribe el objeto de autos, cambiando este auto en particular a vendido
+  venderAuto: (patente) => {
+    for (let i = 0; i < todosAutos.length; i++) {
+      if (todosAutos[i].patente == patente) {
+        todosAutos[i].vendido = true;
+      }
+    }
+    operacionesArchivo.grabarUnJson(todosAutos);
+
+  },
   
 
   autosParaLaVenta: () => {},
