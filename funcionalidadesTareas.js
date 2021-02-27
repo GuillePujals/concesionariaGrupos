@@ -48,12 +48,24 @@ let concesionaria = {
 
 
   // cuando se llama a este metodo se imprime un array de precios de autos cuyo estado vendido es true
-  listaDeVentas: () => { },
-
-
+  listaDeVentas: function () {
   // cuando se llama a este se suman los precios de todos los autos vendidos
   // los precios de los autos vendidos se los trae usando como callback el metodo anterior
-  totalDeVentas: () => { },
+
+    let autosVendidos = todosAutos.filter ( auto => auto.vendido == true);
+    
+    let ventas = [];
+    autosVendidos.forEach(auto => ventas.push(auto.precio));
+
+    return ventas;
+      
+  },
+  
+  totalDeVentas: function () {
+        return this.listaDeVentas().reduce((totalVentas, precio) => totalVentas + precio);
+    
+   },
+
 
   puedeComprar: (auto, persona) => {
     if (auto.precio <= persona.capacidadDePagoTotal
