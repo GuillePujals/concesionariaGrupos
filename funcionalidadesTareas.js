@@ -5,11 +5,17 @@ let todosAutos = operacionesArchivo.leerArchivoJson();
 let concesionaria = {
   //autos:  operacionesArchivo.leerArchivoJson(),
 
-  listar: () => { },
+  
   // cuando se llama a este metodo se imprimen todos los autos en autos.json
+  listar: function () { 
+    for (let i = 0; i < todosAutos.length; i++) {
+      console.log(todosAutos[i].marca);
+      console.log(todosAutos[i].modelo);
+      console.log(todosAutos[i].patente);
+      } 
+  },
 
-
-
+      
   // cuando se llama a este metodo se imprimen todos los datos del auto con de la patente dada. 
   //Sino esta, devuelve null
   buscarAuto: (patente) => {
