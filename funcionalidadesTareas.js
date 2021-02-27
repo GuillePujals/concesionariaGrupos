@@ -1,12 +1,13 @@
 let operacionesArchivo = require('./operacionesArchivos');
-let todosAutos =  operacionesArchivo.leerArchivoJson();
+let todosAutos = operacionesArchivo.leerArchivoJson();
 
 
 let concesionaria = {
   //autos:  operacionesArchivo.leerArchivoJson(),
 
-  listar: () => {},
-      // cuando se llama a este metodo se imprimen todos los autos en autos.json
+  listar: () => { },
+  // cuando se llama a este metodo se imprimen todos los autos en autos.json
+
 
 
   // cuando se llama a este metodo se imprimen todos los datos del auto con de la patente dada. 
@@ -29,37 +30,37 @@ let concesionaria = {
     operacionesArchivo.grabarUnJson(todosAutos);
 
   },
-  
 
-  autosParaLaVenta: () => {},
-    // cuando se llama a este metodo se imprimen todos los autos en autos.json que su estado vendido es false
-    
+  autosParaLaVenta: () => { },
+  // cuando se llama a este metodo se imprimen todos los autos en autos.json que su estado vendido es false
 
-  autosNuevos: () => {},
-    // cuando se llama a este metodo se imprimen todos los autos en autos.json que su estado vendido es false 
-    //y sus km son cero
-    // para determinar cuales no estan vendidos se aprovecha como callback del metodo anterior.
-   
 
-  listaDeVentas: () => {},
-    // cuando se llama a este metodo se imprime un array de precios de autos cuyo estado vendido es true
-    
+  autosNuevos: () => { },
+  // cuando se llama a este metodo se imprimen todos los autos en autos.json que su estado vendido es false 
+  //y sus km son cero
+  // para determinar cuales no estan vendidos se aprovecha como callback del metodo anterior.
 
-  totalDeVentas: () => {},
-    // cuando se llama a este se suman los precios de todos los autos vendidos
-    // los precios de los autos vendidos se los trae usando como callback el metodo anterior
- 
 
-  puedeComprar: () => {},
-    // este metodo recibe un objeto auto y un objeto persona, no se puede llamar directamente.
-    // dice true o false si esa persona puede comprar ese auto
-    // lo que hace es primero chequear si el precio del auto esta por debajo de lo que la persona esta dispuesta a pagar
-    // despues se fija que las cuotas tambien esten por debajo de lo que la persona pagaria por cuota
-    // si y solo si ambas condiciones son true devuelve true, en otro caso devuelve false
-   
+  // cuando se llama a este metodo se imprime un array de precios de autos cuyo estado vendido es true
+  listaDeVentas: () => { },
 
-  autosQuePuedeComprar: () => {},
-    // dada una persona este metodo trae todos los autos que esa persona puede pagar
+
+  // cuando se llama a este se suman los precios de todos los autos vendidos
+  // los precios de los autos vendidos se los trae usando como callback el metodo anterior
+  totalDeVentas: () => { },
+
+  puedeComprar: (auto, persona) => {
+    if (auto.precio <= persona.capacidadDePagoTotal
+      && (auto.precio / auto.cuotas) <= persona.capacidadDePagoEnCuotas) return true;
+  },
+
+  autosQuePuedeComprar: function (persona) {
+    let autosPudeComprar = [];
+    for (let i = 0; i < todosAutos.length; i++) {
+      if (this.puedeComprar(todosAutos[i], persona)) autosPudeComprar.push(todosAutos[i]);
+    };
+    return autosPudeComprar;
+  },
 
 }
 
